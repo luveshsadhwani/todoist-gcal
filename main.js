@@ -1,14 +1,3 @@
-// Heuristics:
-// 1. Get the sync token from integrations database
-// 2. Use the sync token to get updates from the todoist sync api
-// 3. Check which updates are new and which are updates to existing integrations. Store each of these in a new array
-// 4. For each new update, create a new google calendar event
-// 5. For each update, if the integration exists, fetch the google event id from google calendar api
-// 6. Update the google calendar event with the new data
-// 7. Send an update to the google calendar api
-// 8. Update the array of updates with the new google event id
-// 9. Upsert the array of updates to the integrations database
-// 10. Store the new sync token in the integrations database
 var fs = require("fs");
 var syncToken = "";
 function getSyncToken() {
@@ -78,7 +67,7 @@ function createGoogleCalendarEvent(todoistUpdate) {
     };
 }
 var newGoogleCalendarEvents = newIntergrations.map(createGoogleCalendarEvent);
-// 5. For each update, if the integration exists, fetch the google event id from google calendar api
+// 5. For each existing integration, fetch the google event id from google calendar api
 var DUMMY_GOOGLE_CALENDAR_EVENTS = [
     {
         id: 1,
@@ -100,7 +89,7 @@ function getGoogleCalendarEventsById(integrationIds) {
 var existingGoogleCalendarEvents = getGoogleCalendarEventsById(existingIntegrations);
 console.log("Existing google calendar events:");
 console.table(existingGoogleCalendarEvents);
-// 6. Update the google calendar event with the new data
+// 6. Update the google calendar event from existing integration
 function updateGoogleCalendarEvent(googleCalendarEvent, todoistUpdate) {
     console.log("Updating google calendar event");
     return {
