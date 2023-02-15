@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true, // flag any types as an error
+    "preserveConstEnums": true,
+    "strictNullChecks": true
+  },
+  "include": ["*"],
+  "target": "es6"
+}
