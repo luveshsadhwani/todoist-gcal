@@ -5,6 +5,8 @@
     "preserveConstEnums": true,
     "strictNullChecks": true
   },
-  "include": ["*"],
+  "allowJs": true, // Allow JavaScript files to be compiled
+  "checkJs": true, // Type check JavaScript files and report errors
+  "include": ["src"],
   "target": "es6"
 }
